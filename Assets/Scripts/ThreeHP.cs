@@ -1,0 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ThreeHP : MonoBehaviour
+{
+    [SerializeField] private MainMethod main;
+    [SerializeField] private GameObject mainMethod;
+    [SerializeField] private Card attachedCard;   
+
+
+    //Sprite management
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private int defaultHealth;
+    private int currentHealth;
+    [SerializeField] private Sprite h2;
+    [SerializeField] private Sprite h1;
+    
+    
+    void Start()
+    {
+        currentHealth = defaultHealth;
+    }
+
+    void Update()
+    {
+        if (main.GetAttacking() == true)
+        {
+            if (currentHealth != attachedCard.GetHealth())
+            {
+                currentHealth = attachedCard.GetHealth();
+                SetSprite();
+            }
+        }
+    }
+
+    private void SetSprite()
+    {
+        if (attachedCard.GetHealth() == 2)
+        {
+            spriteRenderer.sprite = h2;
+        }
+
+        else 
+        {
+            spriteRenderer.sprite = h1;
+        }
+    }
+}
